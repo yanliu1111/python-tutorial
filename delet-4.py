@@ -1,4 +1,4 @@
-from main import Post, User, session
+from main-manyToMany import Post, User, session
 
 user_to_delete = session.query(User).filter(User.id ==1).first()
 

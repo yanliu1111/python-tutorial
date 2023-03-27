@@ -1,4 +1,4 @@
-from main import Post, User, session
+from main-manyToMany import Post, User, session
 
 # new_user = User (
 #     username = 'testuser',
