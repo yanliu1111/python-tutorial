@@ -1,5 +1,5 @@
 # one to one relationship
-from main import Parent, Child, session
+from main-oneToOne import Parent, Child, session
 
 # parent1 = Parent (name = 'Parent 1')
 # parent2 = Parent (name = 'Parent 2')
