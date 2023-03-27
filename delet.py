@@ -1,8 +1,11 @@
-from main_db import User, Session, engine
+from main import Post, User, session
 
-local_session = Session(bind=engine)
+user_to_delete = session.query(User).filter(User.id ==1).first()
 
-user_to_delete = local_session.query(User).filter(User.username=='Tom').first()
+session.delete(user_to_delete)
+session.commit()
 
-local_session.delete(user_to_delete)
-local_session.commit()
+all_posts = session.query(Post).all() # delete all posts
+all_users = session.query(User).all()
+print(all_posts)
+print(all_users)

@@ -43,7 +43,7 @@ class Post(Base):
     content = Column (String(255), nullable=False)
     user_id = Column (Integer(), ForeignKey('users.id', ondelete='CASCADE'))
     # ondelete='CASCADE' means that if we delete a user, all the posts related to that user will be deleted as well
-    author = relationship('User', back_populates='post', cascade="all, delete") 
+    author = relationship('User', back_populates='post', cascade="all, delete") # delete all posts or related post 
 
     def __repr__(self):
         return f"<Post {self.title}>"
