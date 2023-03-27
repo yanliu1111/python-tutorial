@@ -1,38 +1,47 @@
 import os
-from datetime import datetime
 
-from sqlalchemy import Column, DateTime, Integer, String, create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy import Column, ForeignKey, Integer, String, create_engine
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import relationship, sessionmaker # sessionmaker is a function that creates a session object
 
 BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
-connection_string = f"sqlite:///"+os.path.join(BASE_DIR, 'site.db')
+conn_str='sqlite:///' + os.path.join(BASE_DIR, 'data.db')
+
+engine = create_engine(conn_str, echo= True) # create_engine is a function that creates a connection to the database
 
 Base = declarative_base()
 
-engine = create_engine(connection_string, echo=True) 
-# echo=True: show the sql query are generated on carring out any sql query or any database task for example, if we create db, it shows us the various commands that are going to be run onto db creator tables and if we add or change or delete or update anything, it is going to show us the sql is done for that particular task
+'''
+class Parent:
+    id: int pk
+    name: str
 
-Session = sessionmaker()
+class Child:
+    id: int pk
+    name: str
+    parent_id: int fk (Parent.id)
+'''
 
-"""
-class User
-    id int
-    username str
-    email str
-    date_created datetime
-"""
-
-class User(Base):
-    __tablename__='users' 
+class Parent(Base):
+    __tablename__ = 'parents'
     id = Column(Integer(), primary_key=True)
-    username = Column(Integer(), primary_key=True)
-    username= Column(String(25),nullable=False,unique=True)
-    email = Column(String(80),nullable=False,unique=True)
-    data_created= Column(DateTime(),default=datetime.utcnow) # utconw: sepcify the date at that particular time
-    #return a string representation of the object
+    name = Column(String(25), nullable=False)
+    children = relationship('Child', back_populates='parent', uselist = False, cascade="all, delete") # uselist = False means that there is only one instance of Child to related to the specific Parent
     def __repr__(self):
-        return f"<User username={self.username}, email={self.email}>"
-new_user = User(id=1, username='Bob', email='bob@test.com')
-print(new_user)
-# <__main__.User object at 0x000001D7CB6940D0> location of the object in memory
+        return f"<Parent {self.id}>"
+    
+class Child(Base):
+    __tablename__ = 'children'
+    id = Column(Integer(), primary_key=True)
+    name = Column(String(25), nullable=False)
+    parent_id = Column(Integer(), ForeignKey('parents.id', ondelete='CASCADE'))
+    parent = relationship('Parent', back_populates='children') # back_populates is the opposite of children in Parent
+
+    def __repr__(self):
+        return f"<Child {self.id}>"
+    
+    
+      # create the tables
+Base.metadata.create_all(engine)
+session = sessionmaker(bind=engine)() # session is an instance of the sessionmaker function

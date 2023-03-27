@@ -1,4 +1,4 @@
-from main import Session, User, engine
+from main_db import Session, User, engine
 
 local_session = Session(bind=engine)
 

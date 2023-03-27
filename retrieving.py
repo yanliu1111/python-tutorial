@@ -1,4 +1,4 @@
-from main import User, Session, engine
+from main_db import User, Session, engine
 
 local_session = Session(bind=engine)
 #return all objects in the database
