@@ -1,4 +1,4 @@
-from main import session, Product, Customer
+from main import Customer, Product, session
 
 customer = session.query (Customer). filter (Customer.id == 1). first ()
 
