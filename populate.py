@@ -1,22 +1,51 @@
-# one to one relationship
-from main-oneToOne import Parent, Child, session
+from main import Post, User, session
 
-# parent1 = Parent (name = 'Parent 1')
-# parent2 = Parent (name = 'Parent 2')
+# new_user = User (
+#     username = 'testuser',
+#     email = 'testuser@test.com'
+# )
 
-# session.add_all ([parent1, parent2])
-
+# session.add(new_user)
 # session.commit()
 
-parent1 = session.query(Parent).filter(Parent.id == 1).first()
+post =[
+    {
+    "title": "Learn Django",
+    "content": "Learn Django in 30 days",
+    },
+    {
+    "title": "Learn JavaScript",
+    "content": "Learn JavaScript in 30 days",
+    },
+    {
+    "title": "Learn React",
+    "content": "Learn React in 30 days",
+    },
+    {
+    "title": "Learn TypeScript",
+    "content": "Learn TypeScript in 30 days",
+    },
+    {
+    "title": "Learn Flask",
+    "content": "Learn Flask in 30 days",
+    }
+]
 
-# child1 = Child (name = 'Child 1', parent = parent1)
-# session . add (child1)
-# session . commit ()
+user = session.query(User).filter(User.id == 1).first()
 
-child2 = Child (name = 'Child 2', parent = parent1)
-session . add (child2)
-session . commit ()
-# childer will be only one object to parent1
+# for post in post:
+#     new_post = Post(
+#         title = post['title'],
+#         content = post['content'],
+#         author = user
+#     )
 
-print(parent1.children)
+#     session.add(new_post)
+#     session.commit()
+
+# print(f"post created {post['title']}")
+
+
+post = session.query(Post).filter(Post.id == 1).first()
+print(post.author)
+print (user.post) # second time, we use populate instead of backref so backwards is used on both tables while backward is actually used on one table

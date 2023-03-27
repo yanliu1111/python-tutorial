@@ -29,9 +29,10 @@ class User(Base):
     id = Column (Integer(), primary_key=True)
     username = Column (String(40), nullable=False)
     email = Column (String(40), nullable=True)
-    post = relationship('Post', backref='author', cascade="all, delete")
+    post = relationship('Post', back_populates='author', cascade="all, delete")
     # backref is finding out which user is the author of the post
     # cascade="all, delete" means that if we delete a user, all the posts related to that user will be deleted as well
+
     def __repr__(self):
         return f"<User {self.username}>"
     
@@ -42,8 +43,10 @@ class Post(Base):
     content = Column (String(255), nullable=False)
     user_id = Column (Integer(), ForeignKey('users.id', ondelete='CASCADE'))
     # ondelete='CASCADE' means that if we delete a user, all the posts related to that user will be deleted as well
+    author = relationship('User', back_populates='post', cascade="all, delete") 
 
     def __repr__(self):
         return f"<Post {self.title}>"
     
 Base.metadata.create_all(engine)
+session = sessionmaker()(bind=engine)
