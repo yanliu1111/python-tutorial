@@ -1,21 +1,10 @@
-from itertools import product
 import os
+from itertools import product
+
+from sqlalchemy import (Column, ForeignKey, Integer, String, Table, column,
+                        create_engine)
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import (
-    ForeignKey,
-    column,
-    create_engine,
-    Column,
-    Integer,
-    String,
-    Table
-
-)
-from sqlalchemy.orm import (
-    relationship,
-    sessionmaker
-)
-
+from sqlalchemy.orm import relationship, sessionmaker
 
 BASE_DIR=os.path.dirname(os.path.realpath(__file__))
 
