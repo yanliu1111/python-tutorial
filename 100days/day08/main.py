@@ -16,17 +16,14 @@ def caesar(start_text, shift_amount, cipher_direction):
       end_text += char # if the character is not in the alphabet, just add it to the end_text without changing
   print(f"Here's the {cipher_direction}d result: {end_text}")
 
-  run = True
-  while run:
-    print(logo)
-    direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
-    text = input("Type your message:\n").lower()
-    shift = int(input("Type the shift number:\n"))
-    
-    if shift > 26:
-      shift = shift % 26 # to handle shifts greater than 26
-    caesar(start_text=text, shift_amount=shift, cipher_direction=direction)
-    choice = input("Do you want to run this program again?\nType 'yes' or 'no': ")
-    if choice == 'no':
-      run = False
-      print("Goodbye.") 
+run = True
+while run:
+  print(logo)
+  direction = input("Type 'encode' to encrypt, type 'decode' to decrypt:\n")
+  text = input("Type your message:\n").lower()
+  shift = int(input("Type the shift number:\n"))
+  caesar(start_text=text, shift_amount=shift, cipher_direction=direction)
+  choice = input("Do you want to run this program again?\nType 'yes' or 'no': ").lower()
+  if choice == 'no':
+    run = False
+    print("Goodbye.")
