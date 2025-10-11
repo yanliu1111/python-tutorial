@@ -29,3 +29,25 @@ while auction:
     print("Thank you for your participation.")
   else:
     clear()
+  
+
+import sys
+if len(sys.argv) != 2:
+    print("Usage: python main.py <filename>")
+    sys.exit(1)
+
+print (f"Reading from file: {sys.argv[1]}")
+sys.exit(0)
+
+import csv
+# file = open("file.csv", "a")
+name = input(" Name: ")
+number = input(" Number: ")
+with open("file.csv", "a", newline='') as file:
+  # writer = csv.writer(file)
+  writer = csv.DictWriter(file, fieldnames=["Name", "Number"])
+  writer.writeheader()
+  writer.write({"Name": name, "Number": number})
+
+# file.close()
+
