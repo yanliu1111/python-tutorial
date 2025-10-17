@@ -20,17 +20,21 @@ while auction:
     auction = False
     highest_bidder = 0
     count = -1
-    for e in auction_info:
+    for i, e in auction_info:
       if e['bid'] > highest_bidder:
           highest_bidder = e['bid']
-          count += 1
+          count = i
     winner = auction_info[count]['name']
     print(f"The highest bidder is {winner} with a ${highest_bidder}")
     print("Thank you for your participation.")
   else:
     clear()
-  
 
+# or
+winner = max(auction_info, key=lambda x: x['bid'])
+print(f"The highest bidder is {winner['name']} with a ${winner['bid']}")
+
+# other tests
 import sys
 if len(sys.argv) != 2:
     print("Usage: python main.py <filename>")
