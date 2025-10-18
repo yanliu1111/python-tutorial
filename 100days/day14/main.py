@@ -26,7 +26,7 @@ def higher_lower():
       print(f"Correct! Your current score is: {score}.")
     # print (followers_a, followers_b)
     print(f"Compare A: {profile_a}")
-    print(vs)
+    print('vs')
     print(f"Compare B: {profile_b}")
 
     a_or_b = input("\nWho do you think has more followers? Type 'a', or 'b': ").lower()
