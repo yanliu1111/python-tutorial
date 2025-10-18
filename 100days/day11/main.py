@@ -1,5 +1,4 @@
 from replit import clear
-from art import logo
 import random
 
 def blackjack_game():
@@ -68,7 +67,6 @@ def blackjack_game():
       elif hit == 'n':
         done_playing()
   
-  print(logo)
   cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
   player_cards = []
   cpu_cards = []
